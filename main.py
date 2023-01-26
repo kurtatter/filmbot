@@ -8,7 +8,6 @@ import os
 from aiogram import Bot, Dispatcher, executor, types
 from dotenv import dotenv_values
 
-
 dotenvfile_path = os.path.join(os.path.dirname(__file__), '.env')
 if os.path.exists(dotenvfile_path):
     config = dotenv_values(dotenvfile_path)
@@ -18,6 +17,7 @@ UNICODE_HEART_SMILE = '\U00002764'
 UNICODE_PLUS_SMILE = '\U0000002B'
 UNICODE_FILM_SMILE = '\U0001F3AC'
 UNICODE_FILMS_SMILE = '\U0001F39E'
+UNICODE_QUESTION_SMILE = '\U00002753'
 UNICODE_ADD_FILM_SMILES = f'{UNICODE_PLUS_SMILE} {UNICODE_FILM_SMILE}'
 
 logging.basicConfig(level=logging.INFO)
@@ -50,9 +50,11 @@ def get_random_film_inline_keyboard():
 async def send_welcome(message: types.Message):
     btn_get_random_film = types.KeyboardButton(UNICODE_FILM_SMILE)
     btn_show_all_films = types.KeyboardButton(f'{UNICODE_FILMS_SMILE}')
+    btn_help = types.KeyboardButton(f'{UNICODE_QUESTION_SMILE}')
     welcome_keyboard = types.ReplyKeyboardMarkup()
     welcome_keyboard.add(btn_get_random_film)
     welcome_keyboard.add(btn_show_all_films)
+    welcome_keyboard.add(btn_help)
     await message.reply(f"Пора смотреть фильмы вместе! {UNICODE_HEART_SMILE}", reply_markup=welcome_keyboard)
 
 
@@ -88,6 +90,11 @@ async def get_random_film(message: types.Message):
         await message.answer('Все фильмы уже просмотрены!')
     else:
         await message.answer(random_film, reply_markup=get_random_film_inline_keyboard())
+
+
+@dp.message_handler(lambda message: message.text == UNICODE_QUESTION_SMILE)
+async def get_random_film(message: types.Message):
+    await message.answer("\help помощь")
 
 
 @dp.message_handler(lambda message: 'youtube' in message.text or 'kinopoisk' in message.text)
