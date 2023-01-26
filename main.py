@@ -121,8 +121,9 @@ async def add_film(message: types.Message):
 async def show_all_films(message: types.Message):
     exists_films = db_cursor.execute("select * from films where showed=0").fetchall()
     exists_urls = list(map(lambda film: film[1], exists_films))
-    for url in exists_urls:
-        await message.answer(url)
+    if exists_urls:
+        for url in exists_urls:
+            await message.answer(url)
     else:
         await message.answer('Список фильмов пуст!')
 
