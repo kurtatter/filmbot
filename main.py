@@ -94,7 +94,7 @@ async def get_random_film(message: types.Message):
 
 @dp.message_handler(lambda message: message.text == UNICODE_QUESTION_SMILE)
 async def get_random_film(message: types.Message):
-    await message.answer("\help помощь")
+    await message.answer("/help помощь")
 
 
 @dp.message_handler(lambda message: 'youtube' in message.text or 'kinopoisk' in message.text)
