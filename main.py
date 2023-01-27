@@ -51,7 +51,7 @@ async def send_welcome(message: types.Message):
     btn_get_random_film = types.KeyboardButton(UNICODE_FILM_SMILE)
     btn_show_all_films = types.KeyboardButton(f'{UNICODE_FILMS_SMILE}')
     btn_help = types.KeyboardButton(f'{UNICODE_QUESTION_SMILE}')
-    welcome_keyboard = types.ReplyKeyboardMarkup()
+    welcome_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     welcome_keyboard.add(btn_get_random_film)
     welcome_keyboard.add(btn_show_all_films)
     welcome_keyboard.add(btn_help)
