@@ -97,7 +97,7 @@ async def get_random_film(message: types.Message):
     await message.answer("/help помощь")
 
 
-@dp.message_handler(lambda message: 'youtube' in message.text or 'kinopoisk' in message.text)
+@dp.message_handler(lambda message: 'youtu' in message.text or 'kinopoisk' in message.text)
 async def add_film(message: types.Message):
     username = message.from_user.first_name + ' ' + message.from_user.last_name
     current_datetime = datetime.now().strftime('%Y-%m-%d %H:%M')
